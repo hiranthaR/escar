@@ -1,14 +1,13 @@
 import React from 'react';
 
-class App extends React.Component {
+export default class Index extends React.Component {
 
     render() {
         return (
             <div>
-                {this.props.children}
+                Index
             </div>
         );
     }
-}
 
-export default App;
+}
