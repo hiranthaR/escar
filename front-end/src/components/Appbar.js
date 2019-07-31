@@ -23,7 +23,7 @@ export default class Appbar extends React.Component {
     render() {
         return (
             <div style={styles.root}>
-                <AppBar>
+                <AppBar position={"static"}>
                     <Toolbar>
                         <IconButton style={styles.menuButton} color="inherit" aria-label="Menu">
                             <MenuIcon/>
