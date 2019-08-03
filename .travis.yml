@@ -11,7 +11,7 @@
     provider: heroku
     api_key:
       secure: 9f0108a3-c86e-481e-a014-8e24c4fd34a5
-    app: ituition
+    app: escar
     on:
-  repo: sahanhirantha/ituition
+  repo: sahanhirantha/escar
 
