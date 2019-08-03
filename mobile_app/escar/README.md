@@ -1,6 +1,6 @@
-# mobile_app
+# escar
 
-escar mobile app
+mobile app for escar
 
 ## Getting Started
 

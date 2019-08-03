@@ -1,4 +1,4 @@
-package xyz.hirantha.mobile_app
+package xyz.hirantha.escar
 
 import android.os.Bundle
 

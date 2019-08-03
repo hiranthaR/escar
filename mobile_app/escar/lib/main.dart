@@ -1,5 +1,5 @@
+import 'package:escar/screens/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/screens/main_screen.dart';
 
 void main() => runApp(EscarApp());
 
