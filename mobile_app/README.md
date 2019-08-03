@@ -1,6 +1,6 @@
 # mobile_app
 
-A new Flutter project.
+escar mobile app
 
 ## Getting Started
 
