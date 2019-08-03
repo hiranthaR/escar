@@ -12,10 +12,11 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "react-scripts start : .env",
+    "start": "react-scripts start : .env",
+    "build": "react-scripts build : .env",
+    "test": "react-scripts test : .env",
+    "eject": "react-scripts eject : .env"
   },
   "eslintConfig": {
     "extends": "react-app"
