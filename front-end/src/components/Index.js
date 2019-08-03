@@ -12,6 +12,7 @@ export default class Index extends React.Component {
         return (
             <div style={{marginTop: 20}}>
                 <Paper style={{padding: 10}}>
+                    <h3>Insert a new Item</h3>
                     <Grid container spacing={2}>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
