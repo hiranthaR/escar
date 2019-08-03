@@ -4,6 +4,8 @@ node_js:
 before_script: 
   - cd ./front-end
   - npm install
+script:
+  - npm run build
 branches:
   only:
   - master
