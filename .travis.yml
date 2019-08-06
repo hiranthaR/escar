@@ -15,4 +15,5 @@ deploy:
     secure: 9f0108a3-c86e-481e-a014-8e24c4fd34a5
   app: escar
   on:
+    all_branches: true
 repo: hiranthaR/escar
