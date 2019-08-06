@@ -8,7 +8,7 @@ script:
   - npm run build
 branches:
   only:
-  - master
+  - dev
 deploy:
   provider: heroku
   api_key:
