@@ -77,7 +77,6 @@ export default class Index extends React.Component {
                     <Grid container spacing={2}>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Barcode"}
                                 fullWidth
                                 variant={"outlined"}
@@ -88,7 +87,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Item Name"}
                                 fullWidth
                                 variant={"outlined"}
@@ -99,7 +97,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Brand"}
                                 fullWidth
                                 variant={"outlined"}
@@ -110,7 +107,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Price"}
                                 fullWidth
                                 variant={"outlined"}
@@ -125,7 +121,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 id="date"
                                 label="Expiry Date"
                                 type="date"
@@ -141,7 +136,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 id="date"
                                 label="Manufacture Date"
                                 type="date"
@@ -157,7 +151,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <ChipInput
-                                required
                                 value={this.state.materials}
                                 fullWidth
                                 label='Materials'
@@ -168,7 +161,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"How to use"}
                                 multiline
                                 fullWidth
@@ -180,7 +172,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Company"}
                                 fullWidth
                                 variant={"outlined"}
@@ -191,7 +182,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Nutritional values"}
                                 fullWidth
                                 variant={"outlined"}
@@ -202,7 +192,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"What are the uses"}
                                 multiline
                                 fullWidth
@@ -214,7 +203,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"About the Healthy"}
                                 fullWidth
                                 variant={"outlined"}
@@ -225,7 +213,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Health & Safety Instructions"}
                                 fullWidth
                                 variant={"outlined"}
@@ -236,7 +223,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Telephone Numbers"}
                                 fullWidth
                                 variant={"outlined"}
@@ -247,7 +233,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"How to store"}
                                 fullWidth
                                 multiline
@@ -259,7 +244,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Product Number & Batch Number"}
                                 fullWidth
                                 variant={"outlined"}
@@ -270,7 +254,6 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
-                                required
                                 label={"Category of Product type"}
                                 fullWidth
                                 variant={"outlined"}
