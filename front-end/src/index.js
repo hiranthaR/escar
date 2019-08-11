@@ -6,8 +6,6 @@ import App from './App';
 import Index from './components/Index'
 import * as serviceWorker from './serviceWorker';
 
-require('dotenv').config();
-
 ReactDOM.render(
     <BrowserRouter>
         <App>
