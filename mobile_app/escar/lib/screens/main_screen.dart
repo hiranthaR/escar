@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -9,23 +10,52 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var barcode = '';
-  var details = '';
+  Map details = {};
+  List<Widget> array = [];
 
-  onScan() async {
+  onBarcode(barcode, context) async {
+    showDialog(
+      builder: (context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircularProgressIndicator(),
+        ],
+      ),
+      context: context,
+      barrierDismissible: false,
+    );
+    array.clear();
+    QuerySnapshot qs = await Firestore.instance
+        .collection('items')
+        .where('barcode', isEqualTo: barcode)
+        .limit(1)
+        .getDocuments();
+    setState(() {
+      this.details = qs.documents.length != 0 ? qs.documents[0].data : [];
+      details.forEach(
+        (k, v) => array.add(
+          Row(
+            // mainAxisAlignment: MainAxisAlignment,
+            children: <Widget>[
+              Expanded(child: Text(k)),
+              Expanded(child: Text(v.toString())),
+            ],
+          ),
+        ),
+      );
+    });
+    Navigator.pop(context);
+  }
+
+  onScan(context) async {
     try {
       String barcode =
-          await FlutterBarcodeScanner.scanBarcode('#34eb7d', 'cancel', true);
+          await FlutterBarcodeScanner.scanBarcode('#34eb7d', 'close', true);
       setState(() {
         this.barcode = barcode;
       });
-      // QuerySnapshot qs = await Firestore.instance
-      //     .collection('items')
-      //     .where('barcode', isEqualTo: barcode)
-      //     .limit(1)
-      //     .getDocuments();
-      // setState(() {
-      //   details = qs.documents[0].data.toString();
-      // });
+      onBarcode(barcode, context);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -34,17 +64,29 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Escar'),
+      ),
       body: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              child: Text("click"),
-              onPressed: () => onScan(),
+            Center(
+              child: RaisedButton(
+                child: Text("Scan Barcode"),
+                onPressed: () => onScan(context),
+              ),
+            ),
+            Center(
+              child: RaisedButton(
+                child: Text("Set manually"),
+                // onPressed: () => onBarcode("725272730706"),
+                onPressed: () => onBarcode("testing123", context),
+              ),
             ),
             Text(barcode),
-            Text(details),
+            Column(
+              children: array,
+            ),
           ],
         ),
       ),
