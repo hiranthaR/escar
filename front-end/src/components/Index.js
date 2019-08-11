@@ -15,6 +15,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 
 const INITIAL_STATE = {
     barcode: '',
+    itemName: '',
     brand: '',
     price: '',
     expiryDate: '2020-01-01',
@@ -38,40 +39,40 @@ export default class Index extends React.Component {
     state = INITIAL_STATE;
 
     onClickSave = event => {
-        this.setState({open: true});
+        this.setState({ open: true });
         const item = this.state;
         delete item.open;
         const db = firebase.firestore();
         db.collection("items").add(item).then(() => {
-            this.setState({open: false});
-            this.setState({INITIAL_STATE});
+            this.setState({ open: false });
+            this.setState({ INITIAL_STATE });
         });
     };
 
-    onTextChange = event => this.setState({[event.target.name]: event.target.value});
+    onTextChange = event => this.setState({ [event.target.name]: event.target.value });
 
     onTextNumberChange = event => {
         if (!event.target.value.match(/^\d*\.?\d{0,2}$/)) return;
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({ [event.target.name]: event.target.value });
     };
 
     onAddChip = chip => this.state.materials.push(chip);
 
     onDeleteChip = (chip, index) =>
-        this.setState({materials: this.state.materials.filter(item => item !== chip)});
+        this.setState({ materials: this.state.materials.filter(item => item !== chip) });
 
     render() {
         return (
-            <div style={{marginTop: 20}}>
+            <div style={{ marginTop: 20 }}>
                 <Dialog open={this.state.open}>
                     <DialogTitle>
                         Saving to Database...
                     </DialogTitle>
-                    <DialogContent style={{textAlign: 'center'}}>
-                        <CircularProgress/>
+                    <DialogContent style={{ textAlign: 'center' }}>
+                        <CircularProgress />
                     </DialogContent>
                 </Dialog>
-                <Paper style={{padding: 10}}>
+                <Paper style={{ padding: 10 }}>
                     <h3>Insert a new Item</h3>
                     <Grid container spacing={2}>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
@@ -81,6 +82,16 @@ export default class Index extends React.Component {
                                 variant={"outlined"}
                                 name='barcode'
                                 value={this.state.barcode}
+                                onChange={this.onTextChange}
+                            />
+                        </Grid>
+                        <Grid item md={6} sm={12} xs={12} lg={6}>
+                            <TextField
+                                label={"Item Name"}
+                                fullWidth
+                                variant={"outlined"}
+                                name='itemName'
+                                value={this.state.itemName}
                                 onChange={this.onTextChange}
                             />
                         </Grid>
@@ -251,12 +262,12 @@ export default class Index extends React.Component {
                                 onChange={this.onTextChange}
                             />
                         </Grid>
-                        <Grid item xs={12} style={{textAlign: "right"}}>
+                        <Grid item xs={12} style={{ textAlign: "right" }}>
                             <Button
                                 variant="contained"
                                 color={"primary"}
                                 onClick={this.onClickSave}>
-                                <SaveIcon/>
+                                <SaveIcon />
                                 Save to database
                             </Button>
                         </Grid>
