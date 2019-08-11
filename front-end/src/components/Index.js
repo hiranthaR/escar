@@ -15,6 +15,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 
 const INITIAL_STATE = {
     barcode: '',
+    itemName: '',
     brand: '',
     price: '',
     expiryDate: '2020-01-01',
@@ -38,44 +39,45 @@ export default class Index extends React.Component {
     state = INITIAL_STATE;
 
     onClickSave = event => {
-        this.setState({open: true});
+        this.setState({ open: true });
         const item = this.state;
         delete item.open;
         const db = firebase.firestore();
         db.collection("items").add(item).then(() => {
-            this.setState({open: false});
-            this.setState({INITIAL_STATE});
+            this.setState({ open: false });
+            this.setState({ INITIAL_STATE });
         });
     };
 
-    onTextChange = event => this.setState({[event.target.name]: event.target.value});
+    onTextChange = event => this.setState({ [event.target.name]: event.target.value });
 
     onTextNumberChange = event => {
         if (!event.target.value.match(/^\d*\.?\d{0,2}$/)) return;
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({ [event.target.name]: event.target.value });
     };
 
     onAddChip = chip => this.state.materials.push(chip);
 
     onDeleteChip = (chip, index) =>
-        this.setState({materials: this.state.materials.filter(item => item !== chip)});
+        this.setState({ materials: this.state.materials.filter(item => item !== chip) });
 
     render() {
         return (
-            <div style={{marginTop: 20}}>
+            <div style={{ marginTop: 20 }}>
                 <Dialog open={this.state.open}>
                     <DialogTitle>
                         Saving to Database...
                     </DialogTitle>
-                    <DialogContent style={{textAlign: 'center'}}>
-                        <CircularProgress/>
+                    <DialogContent style={{ textAlign: 'center' }}>
+                        <CircularProgress />
                     </DialogContent>
                 </Dialog>
-                <Paper style={{padding: 10}}>
+                <Paper style={{ padding: 10 }}>
                     <h3>Insert a new Item</h3>
                     <Grid container spacing={2}>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Barcode"}
                                 fullWidth
                                 variant={"outlined"}
@@ -86,6 +88,18 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
+                                label={"Item Name"}
+                                fullWidth
+                                variant={"outlined"}
+                                name='itemName'
+                                value={this.state.itemName}
+                                onChange={this.onTextChange}
+                            />
+                        </Grid>
+                        <Grid item md={6} sm={12} xs={12} lg={6}>
+                            <TextField
+                                required
                                 label={"Brand"}
                                 fullWidth
                                 variant={"outlined"}
@@ -96,6 +110,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Price"}
                                 fullWidth
                                 variant={"outlined"}
@@ -110,6 +125,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 id="date"
                                 label="Expiry Date"
                                 type="date"
@@ -125,6 +141,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 id="date"
                                 label="Manufacture Date"
                                 type="date"
@@ -140,6 +157,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <ChipInput
+                                required
                                 value={this.state.materials}
                                 fullWidth
                                 label='Materials'
@@ -150,6 +168,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"How to use"}
                                 multiline
                                 fullWidth
@@ -161,6 +180,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Company"}
                                 fullWidth
                                 variant={"outlined"}
@@ -171,6 +191,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Nutritional values"}
                                 fullWidth
                                 variant={"outlined"}
@@ -181,6 +202,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"What are the uses"}
                                 multiline
                                 fullWidth
@@ -192,6 +214,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"About the Healthy"}
                                 fullWidth
                                 variant={"outlined"}
@@ -202,6 +225,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Health & Safety Instructions"}
                                 fullWidth
                                 variant={"outlined"}
@@ -212,6 +236,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Telephone Numbers"}
                                 fullWidth
                                 variant={"outlined"}
@@ -222,6 +247,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"How to store"}
                                 fullWidth
                                 multiline
@@ -233,6 +259,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Product Number & Batch Number"}
                                 fullWidth
                                 variant={"outlined"}
@@ -243,6 +270,7 @@ export default class Index extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12} xs={12} lg={6}>
                             <TextField
+                                required
                                 label={"Category of Product type"}
                                 fullWidth
                                 variant={"outlined"}
@@ -251,12 +279,12 @@ export default class Index extends React.Component {
                                 onChange={this.onTextChange}
                             />
                         </Grid>
-                        <Grid item xs={12} style={{textAlign: "right"}}>
+                        <Grid item xs={12} style={{ textAlign: "right" }}>
                             <Button
                                 variant="contained"
                                 color={"primary"}
                                 onClick={this.onClickSave}>
-                                <SaveIcon/>
+                                <SaveIcon />
                                 Save to database
                             </Button>
                         </Grid>
