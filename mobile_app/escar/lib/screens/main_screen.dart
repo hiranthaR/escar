@@ -11,7 +11,19 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var barcode = '';
   Map details = {};
-  List<Widget> array = [];
+  Widget detailsWidget = Container();
+
+  renderWidget(QuerySnapshot qs) {
+    if (qs.documents.length == 0) return Text('No item found for the barcode');
+    return Column(
+      children: <Widget>[
+        Text(
+          qs.documents[0].data['itemName'] ?? "No Name",
+          style: TextStyle(fontSize: 20),
+        )
+      ],
+    );
+  }
 
   onBarcode(barcode, context) async {
     showDialog(
@@ -25,25 +37,13 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       barrierDismissible: false,
     );
-    array.clear();
     QuerySnapshot qs = await Firestore.instance
         .collection('items')
         .where('barcode', isEqualTo: barcode)
         .limit(1)
         .getDocuments();
     setState(() {
-      this.details = qs.documents.length != 0 ? qs.documents[0].data : [];
-      details.forEach(
-        (k, v) => array.add(
-          Row(
-            // mainAxisAlignment: MainAxisAlignment,
-            children: <Widget>[
-              Expanded(child: Text(k)),
-              Expanded(child: Text(v.toString())),
-            ],
-          ),
-        ),
-      );
+      detailsWidget = renderWidget(qs);
     });
     Navigator.pop(context);
   }
@@ -72,23 +72,19 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Center(
               child: RaisedButton(
-                child: Text("Scan Barcode"),
-                onPressed: () => onScan(context),
-              ),
-            ),
-            Center(
-              child: RaisedButton(
                 child: Text("Set manually"),
-                // onPressed: () => onBarcode("725272730706"),
-                onPressed: () => onBarcode("testing123", context),
+                // onPressed: () => onBarcode("725272730706",context),
+                onPressed: () => onBarcode("testding123", context),
               ),
             ),
-            Text(barcode),
-            Column(
-              children: array,
-            ),
+            detailsWidget
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.photo_camera),
+        onPressed: () => onScan(context),
+        backgroundColor: Theme.of(context).primaryIconTheme.color,
       ),
     );
   }
