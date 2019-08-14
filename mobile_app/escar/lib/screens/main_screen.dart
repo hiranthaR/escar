@@ -11,17 +11,78 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var barcode = '';
   Map details = {};
-  Widget detailsWidget = Container();
+  Widget detailsWidget = Expanded(
+    child: Center(
+      child: Text("Scan for the details"),
+    ),
+  );
+  Map detailsKeys = {
+    "barcode": "Barcode :",
+    "brand": "Brand :",
+    "price": "Price ",
+    "expiryDate": "Expire date :",
+    "manufactureDate": "Manufacture date :",
+    "materials": "Materials :",
+    "howToUse": "How to use :",
+    "company": "Company :",
+    "nutritionalValues": "Nutritional Values :",
+    "whatAreTheUses": "What are the uses :",
+    "aboutTheHealthy": "About the Healthy",
+    "healthAndSafetyInstructions": "Health and Safety Instructions",
+    "telephoneNumbers": "Telephone Numbers :",
+    "howToStore": "How to Store :",
+    "productNumberAndBatchNumber": "Product Number & Batch Number :",
+    "categoryOfProductType": "Category of Product type :"
+  };
 
   renderWidget(QuerySnapshot qs) {
     if (qs.documents.length == 0) return Text('No item found for the barcode');
-    return Column(
-      children: <Widget>[
-        Text(
-          qs.documents[0].data['itemName'] ?? "No Name",
-          style: TextStyle(fontSize: 20),
+
+    List<Widget> rowWidgets = detailsKeys.keys
+        .map(
+          (k) => qs.documents[0].data[k] != null
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(child: Text(detailsKeys[k])),
+                    Expanded(
+                      child: k != 'materials'
+                          ? Text(qs.documents[0].data[k])
+                          : Wrap(
+                              children: qs.documents[0].data[k]
+                                  .map<Widget>(
+                                    (item) => Padding(
+                                      padding: EdgeInsets.fromLTRB(3, 0, 3, 0),
+                                      child: Chip(
+                                        label: Text(item),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                    ),
+                  ],
+                )
+              : SizedBox.shrink(),
         )
-      ],
+        .toList();
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: <Widget>[
+          Text(
+            qs.documents[0].data['itemName'] ?? "No Name",
+            style: TextStyle(fontSize: 20),
+          ),
+          Container(
+            height: 20,
+            width: double.infinity,
+          ),
+          Column(
+            children: rowWidgets,
+          ),
+        ],
+      ),
     );
   }
 
@@ -74,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
               child: RaisedButton(
                 child: Text("Set manually"),
                 // onPressed: () => onBarcode("725272730706",context),
-                onPressed: () => onBarcode("testding123", context),
+                onPressed: () => onBarcode("testing123", context),
               ),
             ),
             detailsWidget
