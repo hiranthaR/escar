@@ -3,8 +3,8 @@ node_js:
   - 11.9.0
 before_script: 
   - cd ./front-end
-  - echo #HOME
-  - echo #WTF
+  - echo $HOME
+  - echo $WTF
   - npm install
 script:
   - npm run build
