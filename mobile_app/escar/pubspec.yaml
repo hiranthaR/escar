@@ -26,6 +26,8 @@ dependencies:
   flutter_barcode_scanner:
   firebase:
   cloud_firestore:
+  font_awesome:
+  provider:
 
 dev_dependencies:
   flutter_test:

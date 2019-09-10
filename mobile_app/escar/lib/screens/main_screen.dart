@@ -143,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.photo_camera),
+        child: Icon(Icons.search),
         onPressed: () => onScan(context),
         backgroundColor: Theme.of(context).primaryIconTheme.color,
       ),
